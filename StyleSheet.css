@@ -146,11 +146,8 @@ body {
   margin-left: -15px;
 }
 .bottom-form--left {
-  flex: 0 0 64%;
-  max-width: 64%;
-  position: relative;
   width: 100%;
-  min-height: 1px;
+
   padding-right: 15px;
   padding-left: 15px;
 }

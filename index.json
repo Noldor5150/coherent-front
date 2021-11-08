@@ -1,0 +1,30 @@
+{
+    "data": [
+        {
+            "name": "Fakulteto pavadinimas",
+            "profiliai": [
+                {
+                    "name": "profilio pav",
+                    "kabinetai": ["1", "3"]
+                },
+                {
+                    "name": "profilio pav2",
+                    "kabinetai": ["2", "5", "7"]
+                }
+            ]
+        },
+        {
+            "name": "Fakulteto pavadinimas2",
+            "profiliai": [
+                {
+                    "name": "profilio pav123",
+                    "kabinetai": ["1", "3"]
+                },
+                {
+                    "name": "profilio pav2123",
+                    "kabinetai": ["2", "5", "7"]
+                }
+            ]
+        }
+    ]
+}

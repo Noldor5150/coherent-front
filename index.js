@@ -1,3 +1,6 @@
+
+
+
 const data = [
     {
         name: "Economics",
@@ -5,17 +8,17 @@ const data = [
             {
                 name: "Management",
                 auditorium: [
-                    { name: "1", maxCapacity: 5 }, 
-                    { name: "3", maxCapacity: 10 }, 
+                    { name: "1", maxCapacity: 5 },
+                    { name: "3", maxCapacity: 10 },
                     { name: "4", maxCapacity: 55 },
-                    { name: "111", maxCapacity: 88 }
+                    { name: "1110", maxCapacity: 88 }
                 ]
             },
             {
                 name: "Finance",
                 auditorium: [
-                    { name: "2", maxCapacity: 51 }, 
-                    { name: "101", maxCapacity: 9 }, 
+                    { name: "2", maxCapacity: 51 },
+                    { name: "101", maxCapacity: 9 },
                     { name: "102", maxCapacity: 59 }
                 ]
             }
@@ -27,16 +30,16 @@ const data = [
             {
                 name: "BioChemistry",
                 auditorium: [
-                    { name: "5", maxCapacity: 6 }, 
-                    { name: "111", maxCapacity: 11 }, 
+                    { name: "5", maxCapacity: 6 },
+                    { name: "111", maxCapacity: 11 },
                     { name: "112", maxCapacity: 41 }
                 ]
             },
             {
                 name: "Farmacy",
                 auditorium: [
-                    { name: "6", maxCapacity: 15 }, 
-                    { name: "17", maxCapacity: 101 }, 
+                    { name: "6", maxCapacity: 15 },
+                    { name: "17", maxCapacity: 101 },
                     { name: "18", maxCapacity: 155 }
                 ]
             }
@@ -49,7 +52,7 @@ const studentsData = [
         name: "Aliona",
         surname: "Apina",
         auditoriumName: "18",
-        faculty:"Chemistry",
+        faculty: "Chemistry",
         profile: "Farmacy",
         country: "ru",
     },
@@ -57,7 +60,7 @@ const studentsData = [
         name: "Alina",
         surname: "Gudkova",
         auditoriumName: "18",
-        faculty:"Chemistry",
+        faculty: "Chemistry",
         profile: "Farmacy",
         country: "ru",
     },
@@ -65,7 +68,7 @@ const studentsData = [
         name: "Polina",
         surname: "Alijeva",
         auditoriumName: "18",
-        faculty:"Chemistry",
+        faculty: "Chemistry",
         profile: "Farmacy",
         country: "By",
     },
@@ -73,7 +76,7 @@ const studentsData = [
         name: "Paulaz",
         surname: "ZLyden",
         auditoriumName: "2",
-        faculty:"Economics",
+        faculty: "Economics",
         profile: "Finance",
         country: "ltu",
     },
@@ -81,7 +84,7 @@ const studentsData = [
         name: "Baltas",
         surname: "Zirgas",
         auditoriumName: "101",
-        faculty:"Economics",
+        faculty: "Economics",
         profile: "Finance",
         country: "lat",
     },
@@ -89,31 +92,31 @@ const studentsData = [
         name: "Paolo",
         surname: "Emilio",
         auditoriumName: "1",
-        faculty:"Economics",
+        faculty: "Economics",
         profile: "Management",
         country: "ita",
     },
     {
         name: "Paolo",
         surname: "Emilio2",
-        auditoriumName: "111",
-        faculty:"Economics",
+        auditoriumName: "1110",
+        faculty: "Economics",
         profile: "Management",
         country: "ita",
     },
     {
         name: "Paolo",
         surname: "Emilio3",
-        auditoriumName: "111",
-        faculty:"Economics",
+        auditoriumName: "1110",
+        faculty: "Economics",
         profile: "Management",
         country: "ita",
     },
     {
         name: "Paolo",
         surname: "Emilio5",
-        auditoriumName: "111",
-        faculty:"Economics",
+        auditoriumName: "1110",
+        faculty: "Economics",
         profile: "Management",
         country: "ita",
     },
@@ -121,50 +124,93 @@ const studentsData = [
         name: "Dmitrij",
         surname: "Donskoj",
         auditoriumName: "3",
-        faculty:"Economics",
+        faculty: "Economics",
         profile: "Management",
         country: "ru",
     },
 ]
-const auditorium = [
-    {
-        name : "713c",
-        quantity : 25,
-        maxCapacity : 59,
-        country : "ltu"
-    }
+const auditoriumData = [
+    
+    { name: "6", maxCapacity: 15, profile: "Farmacy", faculty:"Chemistry",quantity: 0 },
+    { name: "17", maxCapacity: 101, profile: "Farmacy", faculty: "Chemistry", quantity: 0 },
+    { name: "18", maxCapacity: 155, profile: "Farmacy", faculty: "Chemistry", quantity: 3 },
+    { name: "5", maxCapacity: 6, profile: "Biochemistry", faculty: "Chemistry", quantity: 3  },
+    { name: "111", maxCapacity: 11, profile: "Biochemistry", faculty: "Chemistry", quantity: 3 },
+    { name: "112", maxCapacity: 41, profile: "Biochemistry", faculty: "Chemistry", quantity: 0 },
+    { name: "2", maxCapacity: 51, profile: "Finance", faculty: "Economics", quantity: 1 },
+    { name: "101", maxCapacity: 9, profile: "Finance", faculty: "Economics", quantity: 1 },
+    { name: "102", maxCapacity: 59, profile: "Finance", faculty: "Economics", quantity: 0 },
+    { name: "1", maxCapacity: 5, profile: "Management", faculty: "Economics", quantity: 1 },
+    { name: "3", maxCapacity: 10, profile: "Management", faculty: "Economics", quantity: 1 },
+    { name: "4", maxCapacity: 55, profile: "Management", faculty: "Economics", quantity: 0 },
+    { name: "1110", maxCapacity: 88, profile: "Management", faculty: "Economics", quantity: 3}
 ]
-window.addEventListener('load', event => {
+
+
+window.addEventListener('DOMContentLoaded', event => {
     createFacultyOptions(data);
-   
 });
 
 let facultySelector = document.getElementById('faculty');
 let profileSelector = document.getElementById('profile');
 let auditoriumSelector = document.getElementById('auditorium');
 let mainTable = document.getElementById("mainTable");
-let seondaryTable = document.getElementById("secondaryTable");
+let secondaryTable = document.getElementById("secondaryTable");
+let auditoriumNameTh = document.getElementById("thStudentAuditorium");
+let studentNameTh = document.getElementById("thStudentName");
+
+
+
+studentNameTh.addEventListener('click', (event) => {
+    addSpan();
+});
+
+
+function addSpan(){
+    const state = getCurrentStateArray();
+    let spanUp = document.createElement("span");
+    spanUp.id="spanUp";
+    spanUp.classList.add("span-padding");
+    let lastSpan = document.getElementById("spanUp");
+    if (typeof(lastSpan) != 'undefined' && lastSpan != null)
+       {
+        if(lastSpan.textContent === "ASC"){
+            spanUp.textContent = "DSC";
+            mainTableItem(state.sort((a,b)=> (a.name < b.name ? 1 : -1)));
+        }
+        else{
+            spanUp.textContent ="ASC";
+            mainTableItem(state.sort((a,b)=> (a.name > b.name ? 1 : -1)));
+        }
+        lastSpan.remove();
+       }
+       else{
+        spanUp.textContent = "ASC";
+        mainTableItem(state.sort((a,b)=> (a.name > b.name ? 1 : -1)));
+       }
+    studentNameTh.appendChild(spanUp);
+}
 
 facultySelector.addEventListener('change', (event) => {
     profileSelector.innerHTML = '';
     const profileData = data.find(item => item.name === event.target.value);
     createProfileOptions(profileData.profile);
-    filterbyFaculty(event.target.value);
+    filterStudentsByFaculty(event.target.value);
+    filterAuditoriumsByFaculty(event.target.value);
     loadAuditoriums();
-   
 });
+
 
 profileSelector.addEventListener('change', (event) => {
     auditoriumSelector.innerHTML = '';
-    if (profileSelector.value==="All")
-    {
+    if (profileSelector.value === "All") {
         let profileData = data.find(item => item.name === facultySelector.value);
         const result = [...new Set([].concat(...profileData.profile.map((o) => o.auditorium)))];
         createAuditoriumOptions(result);
-        filterbyFaculty(facultySelector.value);
+        filterStudentsByFaculty(facultySelector.value);
+        filterAuditoriumsByFaculty(facultySelector.value);
     }
-    else
-    {
+    else {
         let selectedProfileValue = null;
         data.forEach(faculty => {
             const foundElement = faculty.profile.find(
@@ -174,24 +220,25 @@ profileSelector.addEventListener('change', (event) => {
             }
         });
         createAuditoriumOptions(selectedProfileValue.auditorium);
-        filterbyProfile(event.target.value);
+        filterStudentsByProfile(event.target.value);
+        filterAuditoriumsByProfile(event.target.value);
     }
 });
+
+
 auditoriumSelector.addEventListener('change', (event) => {
-   
-    
-    if(event.target.value === "All") {
-       if(profileSelector.value ==="All"){
-
-       }
-       else{
-
-       }
-        secondaryTableItem(filteredData);
-        
+    if (event.target.value === "All") {
+        if (profileSelector.value === "All") {
+            filterAuditoriumsByFaculty(facultySelector.value);
+            filterStudentsByFaculty(facultySelector.value);
+        }
+        else {
+            filterAuditoriumsByProfile(profileSelector.value);
+            filterStudentsByProfile(profileSelector.value);
+        }
     }
-    else{
-
+    else {
+        filterStudentsByAuditorium(event.target.value)
     }
 })
 
@@ -239,86 +286,131 @@ function loadAuditoriums() {
     let profileData = data.find(item => item.name === facultySelector.value);
     const result = [...new Set([].concat(...profileData.profile.map((o) => o.auditorium)))];
     createAuditoriumOptions(result);
+    //console.log(profileData);
+    //console.log(result);
 }
 
-function mainTableItem(filteredData){
+function mainTableItem(filteredData) {
     document.getElementById('mainTableBody')?.remove();
 
     let tbody = document.createElement("tbody");
     tbody.id = 'mainTableBody';
-    filteredData.forEach((student, index) =>{
-    let trElement = document.createElement("tr");
-    let thIndex = document.createElement("th");
-    let thName = document.createElement("th");
-    let thAuditorium = document.createElement("th");
-    let thFaculty = document.createElement("th");
-    let thCountry = document.createElement("th"); 
-    thIndex.textContent = index + 1;
-    thName.textContent = student.name;
-    thAuditorium.textContent = student.auditoriumName;
-    thFaculty.textContent = student.faculty;
-    thCountry.textContent = student.country;
-    trElement.appendChild(thIndex);
-    trElement.appendChild(thName);
-    trElement.appendChild(thAuditorium);
-    trElement.appendChild(thFaculty);
-    trElement.appendChild(thCountry);
-    tbody.appendChild(trElement);
-  })
-  mainTable.appendChild(tbody);
+    filteredData.forEach((student, index) => {
+        let trElement = document.createElement("tr");
+        let thIndex = document.createElement("th");
+        let thName = document.createElement("th");
+        let thAuditorium = document.createElement("th");
+        let thFaculty = document.createElement("th");
+        let thCountry = document.createElement("th");
+        thIndex.textContent = index + 1;
+        thName.textContent = student.name;
+        thAuditorium.textContent = student.auditoriumName;
+        thFaculty.textContent = student.faculty;
+        thCountry.textContent = student.country;
+        trElement.appendChild(thIndex);
+        trElement.appendChild(thName);
+        trElement.appendChild(thAuditorium);
+        trElement.appendChild(thFaculty);
+        trElement.appendChild(thCountry);
+        tbody.appendChild(trElement);
+    })
+    mainTable.appendChild(tbody);
 }
 
-function secondaryTableItem(filteredData){
+function secondaryTableItem(filteredData) {
     document.getElementById('secondaryTableBody')?.remove();
     let tbody = document.createElement("tbody");
     tbody.id = 'secondaryTableBody';
-    filteredData.forEach(auditorium =>{
-      let trElement = document.createElement("tr");
-      let thAuditoriumName = document.createElement("th");
-      let thStudentsQuantity = document.createElement("th");
-      let thMaxCapacity = document.createElement("th");
-      let thCountry= document.createElement("th");
-     
-      thAuditoriumName.textContent = auditorium.name;
-      thStudentsQuantity.textContent = auditorium.quantity;
-      thMaxCapacity.textContent = auditorium.maxCapacity;
-      thCountry.textContent = auditorium.country;
-      
-      trElement.appendChild(thAuditoriumName);
-      trElement.appendChild(thStudentsQuantity);
-      trElement.appendChild(thMaxCapacity);
-      trElement.appendChild(thCountry);
-      tbody.appendChild(trElement);
+    filteredData.forEach(auditorium => {
+        let trElement = document.createElement("tr");
+        let thAuditoriumName = document.createElement("th");
+        let thStudentsQuantity = document.createElement("th");
+        let thMaxCapacity = document.createElement("th");
+        let thCountry = document.createElement("th");
+
+        thAuditoriumName.textContent = auditorium.name;
+        thStudentsQuantity.textContent = auditorium.quantity;
+        thMaxCapacity.textContent = auditorium.maxCapacity;
+        thCountry.textContent = auditorium.country;
+
+        trElement.appendChild(thAuditoriumName);
+        trElement.appendChild(thStudentsQuantity);
+        trElement.appendChild(thMaxCapacity);
+        trElement.appendChild(thCountry);
+        tbody.appendChild(trElement);
     })
     secondaryTable.appendChild(tbody);
-  }
+}
 
-  function filterbyFaculty(selectedFaculty){
-     const result = studentsData.filter(student => student.faculty === selectedFaculty);
-     mainTableItem(result);
+function filterStudentsByFaculty(selectedFaculty) {
+    const result = studentsData.filter(student => student.faculty === selectedFaculty);
+    mainTableItem(result);
+}
 
-  }
-
-  function filterbyProfile(selectedProfile){
+function filterStudentsByProfile(selectedProfile) {
     const result = studentsData.filter(student => student.profile === selectedProfile);
     mainTableItem(result);
+}
 
- }
+function filterAuditoriumsByFaculty(selectedFaculty) {
+    const result = auditoriumData.filter(auditorium => auditorium.faculty === selectedFaculty);
+    secondaryTableItem(result);
+}
+function filterAuditoriumsByProfile(selectedProfile) {
+    const result = auditoriumData.filter(auditorium => auditorium.profile === selectedProfile);
+    secondaryTableItem(result);
+}
 
- function getAuditoriumListByFaculty(facultyName){
-    let filteredData = [];
-    console.log(filteredData);
-    const selectedFaculty = data.find(faculty => faculty.name === facultyName);
-    selectedFaculty.profile.forEach((profile) => {
-        filteredData.push(...profile.auditorium)
-    });
-    filteredData.forEach((item, index) => {
-        studentsData.forEach(student => {
-            if(student.auditoriumName === item.name) {
-                filteredData[index].quantity = 
-                filteredData[index].quantity ? filteredData[index].quantity + 1 : 1
-            }
-        })
-    })
-    return filteredData;
- }
+function filterStudentsByAuditorium(auditoriumName) {
+    const result = studentsData.filter(student => student.auditoriumName === auditoriumName);
+    mainTableItem(result);
+}
+
+function getCurrentStateArray(){
+    let currentTable = document.getElementById('mainTableBody');
+    console.log(currentTable);
+    var tr = document.querySelectorAll('tbody tr');
+    // console.log(currentTable.childNodes[1].children.length);
+    // console.log(currentTable.childNodes.length);
+    let result = [];
+    let obj =  {
+        name:"",
+        auditoriumName: "",
+        faculty: "",
+        profile: "",
+        country: ""
+    };
+    for (let i = 0; i < currentTable.childNodes.length; i++) {
+         {
+          for (let a = 0; a < currentTable.childNodes[i].children.length; a++) {
+            result.push(
+                {
+                 index:currentTable.childNodes[i].children[0].innerHTML,
+                 name: currentTable.childNodes[i].children[1].innerHTML,
+                 auditoriumName: currentTable.childNodes[i].children[2].innerHTML,
+                 faculty:currentTable.childNodes[i].children[3].innerHTML,
+                 country: currentTable.childNodes[i].children[4].innerHTML
+                }
+            );
+          }
+        }
+      }
+      let uniqueArray = removeDuplicates(result, "index");
+    
+      console.log(uniqueArray);
+      return uniqueArray;
+}
+
+function removeDuplicates(originalArray, prop) {
+    let newArray = [];
+    let lookupObject  = {};
+    for(let i in originalArray) {
+       lookupObject[originalArray[i][prop]] = originalArray[i];
+    }
+
+    for(i in lookupObject) {
+        newArray.push(lookupObject[i]);
+    }
+     return newArray;
+}
+

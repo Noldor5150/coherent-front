@@ -230,3 +230,6 @@ body {
   font-weight: bold;
   color: #28a745;
 }
+.span-padding {
+  padding: 5px;
+}

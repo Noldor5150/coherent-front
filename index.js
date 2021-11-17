@@ -1,6 +1,3 @@
-
-
-
 const data = [
     {
         name: "Economics",
@@ -147,8 +144,41 @@ const auditoriumData = [
 ]
 
 
-window.addEventListener('DOMContentLoaded', event => {
+const requestURL = "http://lyceumexams.herokuapp.com/api/dictionary";
+
+async function sendRequest(method, url, body = null) {
+  return await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+    xhr.open(method, url)
+    xhr.responseType = 'json'
+   // xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.onload = () => {
+      if (xhr.status >= 400) {
+        reject(xhr.response)
+      } else {
+        resolve(xhr.response)
+      }
+    }
+    xhr.onerror = () => {
+      reject(xhr.response)
+    }
+    xhr.send(JSON.stringify(body))
+  })
+}
+
+
+
+let someData = {};
+
+  
+window.addEventListener('DOMContentLoaded', async event => {
     createFacultyOptions(data);
+   const result = await sendRequest('GET', requestURL)
+    someData = result;
+    console.log('result', result);
+  
+    console.log('test', Object.keys(result.audiences)
+    .map(key => ({id: String(key), name: result.audiences[key]})));
 });
 
 let facultySelector = document.getElementById('faculty');
@@ -159,12 +189,9 @@ let secondaryTable = document.getElementById("secondaryTable");
 let auditoriumNameTh = document.getElementById("thStudentAuditorium");
 let studentNameTh = document.getElementById("thStudentName");
 
-
-
 studentNameTh.addEventListener('click', (event) => {
     addSpan();
 });
-
 
 function addSpan(){
     const state = getCurrentStateArray();
@@ -198,8 +225,9 @@ facultySelector.addEventListener('change', (event) => {
     filterStudentsByFaculty(event.target.value);
     filterAuditoriumsByFaculty(event.target.value);
     loadAuditoriums();
+    console.log(someData);
+   
 });
-
 
 profileSelector.addEventListener('change', (event) => {
     auditoriumSelector.innerHTML = '';
@@ -224,7 +252,6 @@ profileSelector.addEventListener('change', (event) => {
         filterAuditoriumsByProfile(event.target.value);
     }
 });
-
 
 auditoriumSelector.addEventListener('change', (event) => {
     if (event.target.value === "All") {
@@ -286,13 +313,10 @@ function loadAuditoriums() {
     let profileData = data.find(item => item.name === facultySelector.value);
     const result = [...new Set([].concat(...profileData.profile.map((o) => o.auditorium)))];
     createAuditoriumOptions(result);
-    //console.log(profileData);
-    //console.log(result);
 }
 
 function mainTableItem(filteredData) {
     document.getElementById('mainTableBody')?.remove();
-
     let tbody = document.createElement("tbody");
     tbody.id = 'mainTableBody';
     filteredData.forEach((student, index) => {
@@ -327,12 +351,10 @@ function secondaryTableItem(filteredData) {
         let thStudentsQuantity = document.createElement("th");
         let thMaxCapacity = document.createElement("th");
         let thCountry = document.createElement("th");
-
         thAuditoriumName.textContent = auditorium.name;
         thStudentsQuantity.textContent = auditorium.quantity;
         thMaxCapacity.textContent = auditorium.maxCapacity;
         thCountry.textContent = auditorium.country;
-
         trElement.appendChild(thAuditoriumName);
         trElement.appendChild(thStudentsQuantity);
         trElement.appendChild(thMaxCapacity);
@@ -367,50 +389,14 @@ function filterStudentsByAuditorium(auditoriumName) {
 }
 
 function getCurrentStateArray(){
-    let currentTable = document.getElementById('mainTableBody');
-    console.log(currentTable);
-    var tr = document.querySelectorAll('tbody tr');
-    // console.log(currentTable.childNodes[1].children.length);
-    // console.log(currentTable.childNodes.length);
-    let result = [];
-    let obj =  {
-        name:"",
-        auditoriumName: "",
-        faculty: "",
-        profile: "",
-        country: ""
-    };
-    for (let i = 0; i < currentTable.childNodes.length; i++) {
-         {
-          for (let a = 0; a < currentTable.childNodes[i].children.length; a++) {
-            result.push(
-                {
-                 index:currentTable.childNodes[i].children[0].innerHTML,
-                 name: currentTable.childNodes[i].children[1].innerHTML,
-                 auditoriumName: currentTable.childNodes[i].children[2].innerHTML,
-                 faculty:currentTable.childNodes[i].children[3].innerHTML,
-                 country: currentTable.childNodes[i].children[4].innerHTML
-                }
-            );
-          }
-        }
-      }
-      let uniqueArray = removeDuplicates(result, "index");
+    let state = [];
     
-      console.log(uniqueArray);
-      return uniqueArray;
-}
-
-function removeDuplicates(originalArray, prop) {
-    let newArray = [];
-    let lookupObject  = {};
-    for(let i in originalArray) {
-       lookupObject[originalArray[i][prop]] = originalArray[i];
+    if(profileSelector.value === "All"){
+        state = studentsData.filter(student => student.faculty === facultySelector.value);
     }
-
-    for(i in lookupObject) {
-        newArray.push(lookupObject[i]);
+    else {
+        state = studentsData.filter(student => student.profile === profileSelector.value);
     }
-     return newArray;
+  return state;
 }
 
